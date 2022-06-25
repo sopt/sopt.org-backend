@@ -7,7 +7,14 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon",
-    "build": "tsc && yarn node dist"
+    "build": "tsc && yarn node dist",
+    "prepare": "husky install",
+    "lint-staged": "lint-staged"
+  },
+  "lint-staged": {
+    "**/*.ts": [
+      "eslint --fix"
+    ]
   },
   "dependencies": {
     "aws-sdk": "^2.1158.0",
@@ -33,6 +40,8 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.0.3",
     "nodemon": "^2.0.16",
     "prettier": "^2.7.1",
     "prisma": "^3.15.2",
