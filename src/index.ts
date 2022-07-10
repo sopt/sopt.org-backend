@@ -1,10 +1,12 @@
 import express, { Request, Response, NextFunction } from "express";
 import config from "./config";
+import routes from "./routes";
 
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(routes);
 
 interface ErrorType {
   message: string;
