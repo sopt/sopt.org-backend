@@ -7,9 +7,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Project {
+model Logo {
   id        Int      @id(map: "project_pk") @unique(map: "project_id_uindex") @default(autoincrement())
-  logoImage String
+  imageUrl  String
   createdAt DateTime @default(dbgenerated("timezone('Asia/Seoul'::text, now())")) @db.Timestamp(6)
   updatedAt DateTime @default(dbgenerated("timezone('Asia/Seoul'::text, now())")) @db.Timestamp(6)
 }
