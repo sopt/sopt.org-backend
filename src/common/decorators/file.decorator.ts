@@ -4,7 +4,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiConsumes } from '@nestjs/swagger';
 import * as AWS from 'aws-sdk';
 import { ValidatorConstraint } from 'class-validator';
-import * as multerS3 from 'multer-s3-transform';
+import multerS3 from 'multer-s3-transform';
 import { nanoid } from 'nanoid';
 import path from 'path';
 import { ApiConfigService } from 'src/config/services/api-config.service';
