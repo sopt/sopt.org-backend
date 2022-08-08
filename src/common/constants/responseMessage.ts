@@ -4,4 +4,6 @@ export default {
   NOT_FOUND: '잘못된 경로입니다.',
   NO_IMAGE_TYPE: '이미지 파일이 아닙니다',
   INTERNAL_SERVER_ERROR: '서버 내부 오류',
+
+  READ_LOGO_SUCCESS: '프로젝트 로고 조회 성공'
 };

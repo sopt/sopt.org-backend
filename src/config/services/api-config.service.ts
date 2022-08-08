@@ -6,6 +6,7 @@ import { isNil } from 'lodash';
 export class ApiConfigService {
   constructor(private configService: ConfigService) {}
 
+  //^ .env 값 접근
   private get(key: string): string {
     const value = this.configService.get<string>(key);
 
@@ -16,6 +17,7 @@ export class ApiConfigService {
     return value;
   }
 
+  //^ Number 환경변수 접근
   private getNumber(key: string): number {
     const value = this.get(key);
 
@@ -26,6 +28,7 @@ export class ApiConfigService {
     }
   }
 
+  //^ Boolean 환경변수 접근
   private getBoolean(key: string): boolean {
     const value = this.get(key);
 
@@ -36,31 +39,35 @@ export class ApiConfigService {
     }
   }
 
+  //^ String 환경변수 접근
   private getString(key: string): string {
     const value = this.get(key);
 
     return value.replace(/\\n/g, '\n');
   }
 
+  //* 프로젝트 기본 환경설정
   get appConfig() {
     return {
       port: this.getString('PORT'),
     };
   }
 
-  get dbConfig() {
-    return {
-      dbSchema: this.getString('SCHEMA_NAME'),
-      dbUrl: this.getString('DATABASE_URL'),
-    };
-  }
-
+  //* S3 환경설정
   get awsS3Config() {
     return {
       bucket: this.getString('AWS_BUCKET'),
       bucketAccessKey: this.getString('AWS_ACCESS_KEY'),
       bucketSecretKey: this.getString('AWS_SECRET_ACCESS_KEY'),
       bucketRegion: this.getString('AWS_REGION'),
+    };
+  }
+
+  //* 이미지 환경설정
+  get imageConfig() {
+    return {
+      baseUrl: this.getString('IMAGE_BASE_URL'),
+      cacheUrl: this.getString('IMAGE_CACHE_URL'),
     };
   }
 }

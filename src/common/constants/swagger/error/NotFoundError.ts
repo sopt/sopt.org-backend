@@ -12,7 +12,7 @@ export class NotFoundError {
 
   @ApiProperty({
     type: 'boolean',
-    example: 'fail',
+    example: 'false',
   })
   success: boolean;
 

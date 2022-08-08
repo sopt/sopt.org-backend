@@ -12,7 +12,7 @@ export class UnauthorizedError {
 
   @ApiProperty({
     type: 'boolean',
-    example: 'fail',
+    example: 'false',
   })
   success: boolean;
 

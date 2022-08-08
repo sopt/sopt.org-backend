@@ -1,5 +1,5 @@
-import { sc } from '..';
 import { ApiExtraModels, ApiProperty } from '@nestjs/swagger';
+import { sc } from '..';
 
 @ApiExtraModels()
 export default class AcceptedSuccess {

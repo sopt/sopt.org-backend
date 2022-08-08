@@ -12,7 +12,7 @@ export class UnprocessableEntityError {
 
   @ApiProperty({
     type: 'boolean',
-    example: 'fail',
+    example: 'false',
   })
   success: boolean;
 

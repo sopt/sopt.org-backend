@@ -1,7 +1,7 @@
 import { LoggerService as LS } from '@nestjs/common';
+import dayjs from 'dayjs';
 import { utilities as nestWinstonModuleUtilities } from 'nest-winston';
 import * as winston from 'winston';
-import dayjs from 'dayjs';
 
 const { errors, combine, json, timestamp, ms, prettyPrint } = winston.format;
 
@@ -10,13 +10,7 @@ export class LoggerService implements LS {
 
   constructor(service: string) {
     this.logger = winston.createLogger({
-      format: combine(
-        errors({ stack: true }),
-        json(),
-        timestamp({ format: 'isoDateTime' }),
-        ms(),
-        prettyPrint(),
-      ),
+      format: combine(errors({ stack: true }), json(), timestamp({ format: 'isoDateTime' }), ms(), prettyPrint()),
       defaultMeta: { service },
       transports: [
         new winston.transports.File({
@@ -29,7 +23,6 @@ export class LoggerService implements LS {
           level: 'debug',
           format: combine(nestWinstonModuleUtilities.format.nestLike()),
         }),
-
         new winston.transports.File({
           filename: `application-${dayjs().format('YYYY-MM-DD')}.log`,
           dirname: 'logs',
