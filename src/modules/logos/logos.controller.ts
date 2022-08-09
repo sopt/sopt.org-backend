@@ -1,6 +1,8 @@
 import { Controller, Get } from '@nestjs/common';
 import { ApiInternalServerErrorResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { LogoGetSuccess } from 'src/common/constants/swagger/domain/logos/LogosGetSuccess';
+import { rm } from 'src/common/constants';
+import { ResponseEntity } from 'src/common/constants/responseEntity';
+import { LogoGetSuccess } from 'src/common/constants/swagger/domain/logos/LogoGetSuccess';
 import { InternalServerError } from 'src/common/constants/swagger/error/InternalServerError';
 import { LogosService } from './logos.service';
 
@@ -22,6 +24,7 @@ export class LogosController {
     type: InternalServerError,
   })
   async getLogos() {
-    //TODO
+    const data = await this.logosService.getLogos();
+    return ResponseEntity.OK_WITH_DATA(rm.READ_LOGOS_SUCCESS, data);
   }
 }
