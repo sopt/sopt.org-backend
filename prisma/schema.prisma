@@ -15,11 +15,11 @@ model Logo {
 model Leader {
   id         Int      @id(map: "leader_pk") @unique(map: "leader_id_uindex") @default(autoincrement())
   semesterId Int
-  partd      Int
+  partId     Int
   name       String   @db.VarChar(10)
   content    String?
   image      String?  @db.VarChar(500)
-  Part       Part     @relation(fields: [partd], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "leader_part_id_fk")
+  part       Part     @relation(fields: [partId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "leader_part_id_fk")
   Semester   Semester @relation(fields: [semesterId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "leader_semester_id_fk")
 }
 
@@ -28,7 +28,7 @@ model Member {
   semesterId Int
   partId     Int
   count      Int
-  Part       Part     @relation(fields: [partId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "member_part_id_fk")
+  part       Part     @relation(fields: [partId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "member_part_id_fk")
   Semester   Semester @relation(fields: [semesterId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "member_semester_id_fk")
 }
 
@@ -42,6 +42,6 @@ model Part {
 model Semester {
   id      Int      @id(map: "semester_pk") @unique(map: "semester_id_uindex") @default(autoincrement())
   history String?
-  Leader  Leader[]
-  Member  Member[]
+  leaders Leader[]
+  members Member[]
 }
