@@ -20,7 +20,7 @@ model Leader {
   content    String?
   image      String?  @db.VarChar(500)
   part       Part     @relation(fields: [partId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "leader_part_id_fk")
-  Semester   Semester @relation(fields: [semesterId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "leader_semester_id_fk")
+  semester   Semester @relation(fields: [semesterId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "leader_semester_id_fk")
 }
 
 model Member {
@@ -29,14 +29,14 @@ model Member {
   partId     Int?
   count      Int
   part       Part?    @relation(fields: [partId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "member_part_id_fk")
-  Semester   Semester @relation(fields: [semesterId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "member_semester_id_fk")
+  semester   Semester @relation(fields: [semesterId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "member_semester_id_fk")
 }
 
 model Part {
   id     Int      @id(map: "part_pk") @unique(map: "part_id_uindex") @default(autoincrement())
   name   String   @unique(map: "part_name_uindex") @db.VarChar(15)
-  Leader Leader[]
-  Member Member[]
+  leaders Leader[]
+  member Member[]
 }
 
 model Semester {
