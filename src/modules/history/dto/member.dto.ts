@@ -9,7 +9,11 @@ export class MemberDTO {
   @ApiProperty({ type: PartDTO, isArray: true }) @Exclude() private readonly parts: PartDTO[];
 
   constructor(members: MemberPart[]) {
-    this.total = _.sumBy(members, 'count');
-    this.parts = members.map((member) => new PartDTO(member.part, member.count));
+    if (members.length === 1) {
+      this.total = members[0].count;
+    } else {
+      this.total = _.sumBy(members, 'count');
+      this.parts = members.map((member) => new PartDTO(member.part, member.count));
+    }
   }
 }

@@ -26,9 +26,9 @@ model Leader {
 model Member {
   id         Int      @id(map: "member_pk") @unique(map: "member_id_uindex") @default(autoincrement())
   semesterId Int
-  partId     Int
+  partId     Int?
   count      Int
-  part       Part     @relation(fields: [partId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "member_part_id_fk")
+  part       Part?    @relation(fields: [partId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "member_part_id_fk")
   Semester   Semester @relation(fields: [semesterId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "member_semester_id_fk")
 }
 
