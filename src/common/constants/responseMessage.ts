@@ -9,5 +9,7 @@ export default {
   //^ 메인
   READ_LOGO_SUCCESS: '프로젝트 로고 조회 성공',
 
-  //^ 히스토리
+  //^ 연혁
+  READ_HISTORY_SUCCESS: '기수별 연혁 조회 성공',
+  NO_SEMESTER: '존재하지 않는 기수입니다.',
 };
