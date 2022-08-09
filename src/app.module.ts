@@ -3,11 +3,11 @@ import { CommonModule } from 'src/config/common.module';
 import { ConfigurationModule } from 'src/config/config.module';
 import { AppController } from './app.controller';
 import { LoggerMiddleware } from './common/middlewares/logger.middleware';
-import { LogosModule } from './modules/logos/logos.module';
+import { LogoModule } from './modules/logo/logo.module';
 import { PrismaModule } from './modules/prisma/prisma.module';
 
 @Module({
-  imports: [ConfigurationModule, PrismaModule, CommonModule, LogosModule],
+  imports: [ConfigurationModule, PrismaModule, CommonModule, LogoModule],
   controllers: [AppController],
   providers: [],
 })

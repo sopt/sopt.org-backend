@@ -7,7 +7,7 @@ export default {
   INTERNAL_SERVER_ERROR: '서버 내부 오류',
 
   //^ 메인
-  READ_LOGOS_SUCCESS: '프로젝트 로고 조회 성공',
+  READ_LOGO_SUCCESS: '프로젝트 로고 조회 성공',
 
   //^ 히스토리
 };
