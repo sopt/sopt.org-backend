@@ -9,6 +9,7 @@ import {
 import { rm } from 'src/common/constants';
 import { ResponseEntity } from 'src/common/constants/responseEntity';
 import { HistoryGetSuccess } from 'src/common/constants/swagger/domain/history/HistoryGetSuccess';
+import { HistoryPartnersGetSuccess } from 'src/common/constants/swagger/domain/history/HistoryPartnersGetSuccess';
 import { BadRequestError } from 'src/common/constants/swagger/error/BadRequestError';
 import { InternalServerError } from 'src/common/constants/swagger/error/InternalServerError';
 import { SemesterTargetDTO } from './dto/semester-target.dto';
@@ -18,6 +19,23 @@ import { HistoryService } from './history.service';
 @Controller('history')
 export class HistoryController {
   constructor(private readonly historyService: HistoryService) {}
+
+  @Get('partners')
+  @ApiOperation({
+    summary: '협력사 조회',
+  })
+  @ApiOkResponse({
+    description: '협력사 조회 성공',
+    type: HistoryPartnersGetSuccess,
+  })
+  @ApiInternalServerErrorResponse({
+    description: '서버 내부 오류입니다.',
+    type: InternalServerError,
+  })
+  async getHistoryPartners() {
+    const data = await this.historyService.getHistoryPartners();
+    return ResponseEntity.OK_WITH_DATA(rm.READ_PARTNERS_SUCCESS, data);
+  }
 
   @Get(':semesterId')
   @ApiOperation({
