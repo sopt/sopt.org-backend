@@ -8,8 +8,10 @@ datasource db {
 }
 
 model Logo {
-  id    Int    @id(map: "logo_pk") @unique(map: "logo_id_uindex") @default(autoincrement())
-  image String @unique(map: "logo_image_uindex") @db.VarChar(500)
+  id         Int      @id(map: "logo_pk") @unique(map: "logo_id_uindex") @default(autoincrement())
+  semesterId Int
+  image      String?  @db.VarChar(500)
+  Semester   Semester @relation(fields: [semesterId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "logo_semester_id_fk")
 }
 
 model Leader {
@@ -43,6 +45,7 @@ model Semester {
   id      Int      @id(map: "semester_pk") @unique(map: "semester_id_uindex") @default(autoincrement())
   history String?
   leaders Leader[]
+  Logo    Logo[]
   members Member[]
 }
 
