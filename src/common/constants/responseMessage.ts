@@ -6,6 +6,9 @@ export default {
   NO_IMAGE_TYPE: '이미지 파일이 아닙니다',
   INTERNAL_SERVER_ERROR: '서버 내부 오류',
 
+  //^ 업로드
+  UPLOAD_IMAGES_SUCCESS: '이미지 업로드 성공',
+
   //^ 메인
   READ_LOGO_SUCCESS: '프로젝트 로고 조회 성공',
 

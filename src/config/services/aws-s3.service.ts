@@ -9,7 +9,7 @@ import { ApiConfigService } from './api-config.service';
 export class AwsS3Service {
   constructor(private readonly config: ApiConfigService) {}
 
-  storage(dirName: string, type?: string) {
+  storage(dirName: string) {
     return multerS3({
       s3: new AWS.S3({
         accessKeyId: this.config.awsS3Config.bucketAccessKey,
@@ -24,20 +24,17 @@ export class AwsS3Service {
           id: 'resized',
           key: (req: Express.Request, file: Express.MulterS3.File, cb: any) => {
             const extension = path.extname(file.originalname);
-            !type
-              ? cb(null, `images/${dirName}/${Date.now()}_${nanoid()}${extension}`)
-              : cb(null, `images/${dirName}/${file.originalname}`);
+            cb(null, `mainpage/${dirName}/${Date.now()}_${nanoid()}${extension}`);
           },
           transform: (req: Express.Request, file: Express.MulterS3.File, cb: any) => {
-            cb(null, sharp().webp().resize(800, 800));
+            cb(null, sharp().webp());
           },
         },
       ],
     });
   }
 
-  getImageUrl(file: any) {
-    const url = file.transforms[0].location;
-    return url.replace(`${this.config.imageConfig.baseUrl}`, `${this.config.imageConfig.cacheUrl}`);
+  getImageUrl(file: any): string {
+    return file.transforms[0].location;
   }
 }
