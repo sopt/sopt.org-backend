@@ -1,5 +1,5 @@
 import { Body, Controller, Post, UploadedFiles } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiExcludeController } from '@nestjs/swagger';
 import { rm } from 'src/common/constants';
 import { ResponseEntity } from 'src/common/constants/responseEntity';
 import { ApiImageFiles } from 'src/common/decorators/api-file.decorator';
@@ -7,7 +7,7 @@ import { AwsS3Service } from 'src/config/services/aws-s3.service';
 import { SemesterTargetDTO } from '../history/dto/semester-target.dto';
 import { UploadService } from './upload.service';
 
-@ApiTags('Upload')
+@ApiExcludeController()
 @Controller('upload')
 export class UploadController {
   constructor(private readonly uploadService: UploadService, private readonly awsS3Service: AwsS3Service) {}
