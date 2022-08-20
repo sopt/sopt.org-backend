@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { UploadPartnersLogoBodyDTO } from './dto/upload-partners-logo.body.dto';
 import { UploadPartnersPosterBodyDTO } from './dto/upload-partners-poster.body.dto';
 
 @Injectable()
@@ -21,6 +22,15 @@ export class UploadService {
       data: {
         ...dto,
         posterImage: image,
+      },
+    });
+  }
+
+  async createPartnersLogo(dto: UploadPartnersLogoBodyDTO, image: string) {
+    await this.prisma.partner.create({
+      data: {
+        ...dto,
+        image,
       },
     });
   }

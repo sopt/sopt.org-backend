@@ -5,6 +5,7 @@ import { ResponseEntity } from 'src/common/constants/responseEntity';
 import { ApiImageFile, ApiImageFiles } from 'src/common/decorators/api-file.decorator';
 import { AwsS3Service } from 'src/config/services/aws-s3.service';
 import { SemesterTargetDTO } from '../history/dto/semester-target.dto';
+import { UploadPartnersLogoBodyDTO } from './dto/upload-partners-logo.body.dto';
 import { UploadPartnersPosterBodyDTO } from './dto/upload-partners-poster.body.dto';
 import { UploadService } from './upload.service';
 
@@ -27,5 +28,13 @@ export class UploadController {
     const image = this.awsS3Service.getImageUrl(file);
     await this.uploadService.createPartnersPoster(dto, image);
     return ResponseEntity.CREATED_WITH(rm.UPLOAD_PARTNERS_POSTER_SUCCESS);
+  }
+
+  @Post('partners/logo')
+  @ApiImageFile('partners/logo')
+  async uploadPartnersLogo(@UploadedFile() file: Express.MulterS3.File, @Body() dto: UploadPartnersLogoBodyDTO) {
+    const image = this.awsS3Service.getImageUrl(file);
+    await this.uploadService.createPartnersLogo(dto, image);
+    return ResponseEntity.CREATED_WITH(rm.UPLOAD_PARTNERS_LOGO_SUCCESS);
   }
 }
