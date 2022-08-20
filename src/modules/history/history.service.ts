@@ -45,6 +45,7 @@ export class HistoryService {
     const projects = await this.prisma.project.findMany({
       orderBy: {
         year: 'desc',
+        id: 'asc',
       },
     });
     const partners = await this.prisma.partner.findMany({
