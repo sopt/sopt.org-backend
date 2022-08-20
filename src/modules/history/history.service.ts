@@ -7,7 +7,6 @@ import { HistoryPartnersGetResDTO } from './dto/history-partners-get.res.dto';
 export class HistoryService {
   constructor(private readonly prisma: PrismaService) {}
 
-  //* 기수별 연혁 조회
   async getHistoryBySemester(semesterId: number) {
     const semester = await this.prisma.semester.findFirst({
       where: {
@@ -42,10 +41,17 @@ export class HistoryService {
     return new HistoryGetResDTO(semester, semester.leaders, semester.members);
   }
 
-  //* 협력사 조회
   async getHistoryPartners() {
-    const projects = await this.prisma.project.findMany();
-    const partners = await this.prisma.partner.findMany();
+    const projects = await this.prisma.project.findMany({
+      orderBy: {
+        year: 'desc',
+      },
+    });
+    const partners = await this.prisma.partner.findMany({
+      orderBy: {
+        id: 'asc',
+      },
+    });
 
     return new HistoryPartnersGetResDTO(projects, partners);
   }
