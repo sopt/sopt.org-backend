@@ -70,4 +70,12 @@ export class ApiConfigService {
       cacheUrl: this.getString('IMAGE_CACHE_URL'),
     };
   }
+
+  //* 구글 스프레드 시트 환경설정
+  get googleSheetConfig() {
+    return {
+      leaderSheetId: this.getString('LEADER_SHEET_ID'),
+      historySheetId: this.getString('HISTORY_SHEET_ID'),
+    };
+  }
 }

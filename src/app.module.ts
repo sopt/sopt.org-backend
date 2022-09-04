@@ -7,9 +7,10 @@ import { LoggerMiddleware } from './common/middlewares/logger.middleware';
 import { HistoryModule } from './modules/history/history.module';
 import { LogoModule } from './modules/logo/logo.module';
 import { PrismaModule } from './modules/prisma/prisma.module';
+import { UploadModule } from './modules/upload/upload.module';
 
 @Module({
-  imports: [ConfigurationModule, PrismaModule, CommonModule, LogoModule, HistoryModule],
+  imports: [ConfigurationModule, PrismaModule, CommonModule, LogoModule, HistoryModule, UploadModule],
   controllers: [AppController],
   providers: [SemesterExistsRule],
 })

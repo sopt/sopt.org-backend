@@ -1,12 +1,9 @@
-import { Body, Controller, Post, UploadedFile, UploadedFiles } from '@nestjs/common';
+import { Controller, Post, UploadedFiles } from '@nestjs/common';
 import { ApiExcludeController } from '@nestjs/swagger';
 import { rm } from 'src/common/constants';
 import { ResponseEntity } from 'src/common/constants/responseEntity';
-import { ApiImageFile, ApiImageFiles } from 'src/common/decorators/api-file.decorator';
+import { ApiImageFiles } from 'src/common/decorators/api-file.decorator';
 import { AwsS3Service } from 'src/config/services/aws-s3.service';
-import { SemesterTargetDTO } from '../history/dto/semester-target.dto';
-import { UploadPartnersLogoBodyDTO } from './dto/upload-partners-logo.body.dto';
-import { UploadPartnersPosterBodyDTO } from './dto/upload-partners-poster.body.dto';
 import { UploadService } from './upload.service';
 
 @ApiExcludeController()
@@ -14,27 +11,38 @@ import { UploadService } from './upload.service';
 export class UploadController {
   constructor(private readonly uploadService: UploadService, private readonly awsS3Service: AwsS3Service) {}
 
-  @Post('logo')
-  @ApiImageFiles('logo')
-  async uploadLogo(@UploadedFiles() files: Express.MulterS3.File[], @Body() dto: SemesterTargetDTO) {
-    const images = files.map((file) => this.awsS3Service.getImageUrl(file));
-    await this.uploadService.createLogos(dto.semesterId, images);
-    return ResponseEntity.CREATED_WITH(rm.UPLOAD_LOGO_SUCCESS);
+  //* 임원진 파일 업로드
+  @Post('leader')
+  @ApiImageFiles('leader')
+  async uploadLeader(@UploadedFiles() files: Express.MulterS3.File[]) {
+    return ResponseEntity.CREATED_WITH(rm.UPLOAD_LEADER_SUCCESS);
   }
 
-  @Post('partners/poster')
-  @ApiImageFile('partners/poster')
-  async uploadPartnersPoster(@UploadedFile() file: Express.MulterS3.File, @Body() dto: UploadPartnersPosterBodyDTO) {
-    const image = this.awsS3Service.getImageUrl(file);
-    await this.uploadService.createPartnersPoster(dto, image);
-    return ResponseEntity.CREATED_WITH(rm.UPLOAD_PARTNERS_POSTER_SUCCESS);
+  //* 기수 로고 파일 업로드
+  @Post('semester/logo')
+  @ApiImageFiles('semester/logo')
+  async uploadSemesterLogo(@UploadedFiles() files: Express.MulterS3.File[]) {
+    return ResponseEntity.CREATED_WITH(rm.UPLOAD_SEMESTER_LOGO_SUCCESS);
   }
 
-  @Post('partners/logo')
-  @ApiImageFile('partners/logo')
-  async uploadPartnersLogo(@UploadedFile() file: Express.MulterS3.File, @Body() dto: UploadPartnersLogoBodyDTO) {
-    const image = this.awsS3Service.getImageUrl(file);
-    await this.uploadService.createPartnersLogo(dto, image);
-    return ResponseEntity.CREATED_WITH(rm.UPLOAD_PARTNERS_LOGO_SUCCESS);
+  //* 기수 로고 파일 업로드
+  @Post('semester/background')
+  @ApiImageFiles('semester/background')
+  async uploadSemesterBackground(@UploadedFiles() files: Express.MulterS3.File[]) {
+    return ResponseEntity.CREATED_WITH(rm.UPLOAD_SEMESTER_BACKGROUND_SUCCESS);
   }
+
+  //* 기수 핵심가치 파일 업로드
+  @Post('semester/core')
+  @ApiImageFiles('semester/core')
+  async uploadSemesterCore(@UploadedFiles() files: Express.MulterS3.File[]) {
+    return ResponseEntity.CREATED_WITH(rm.UPLOAD_SEMESTER_CORE_SUCCESS);
+  }
+
+  //TODO 임원진 데이터 업로드
+  // @Post('sheet/leader/:semesterId')
+  // async uploadPost(@Body() dto: UploadSheetReqDTO) {
+  //   await this.uploadService.uploadLeader(dto);
+  //   return ResponseEntity.OK_WITH(rm.UPLOAD_LEADER_SUCCESS);
+  // }
 }

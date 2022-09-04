@@ -8,6 +8,10 @@ export default {
 
   //^ 업로드
   UPLOAD_LOGO_SUCCESS: '로고 업로드 성공',
+  UPLOAD_LEADER_SUCCESS: '임원진 이미지 업로드 성공',
+  UPLOAD_SEMESTER_LOGO_SUCCESS: '기수 로고 업로드 성공',
+  UPLOAD_SEMESTER_BACKGROUND_SUCCESS: '기수 배경 업로드 성공',
+  UPLOAD_SEMESTER_CORE_SUCCESS: '기수 핵심가치 업로드 성공',
   UPLOAD_PARTNERS_POSTER_SUCCESS: '협력사 포스터 업로드 성공',
   UPLOAD_PARTNERS_LOGO_SUCCESS: '협력사 로고 업로드 성공',
 
