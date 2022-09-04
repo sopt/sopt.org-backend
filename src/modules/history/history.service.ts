@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { HistoryGetResDTO } from './dto/history-get.res.dto';
 import { HistoryPartnersGetResDTO } from './dto/history-partners-get.res.dto';
+import { SemesterGetResDTO } from './dto/semester-get.res.dto';
 
 @Injectable()
 export class HistoryService {
@@ -54,5 +55,19 @@ export class HistoryService {
     });
 
     return new HistoryPartnersGetResDTO(projects, partners);
+  }
+
+  async getAllSeasonsHistory(page: number, limit: number) {
+    const total = await this.prisma.semester.count();
+
+    const semesters = await this.prisma.semester.findMany({
+      skip: (page - 1) * limit,
+      take: limit,
+      orderBy: {
+        id: 'desc',
+      },
+    });
+
+    return new SemesterGetResDTO(page, limit, total, semesters);
   }
 }

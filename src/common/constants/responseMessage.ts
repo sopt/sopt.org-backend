@@ -16,6 +16,7 @@ export default {
 
   //^ 연혁
   READ_HISTORY_SUCCESS: '기수별 연혁 조회 성공',
+  READ_SEASON_HISTORY_SUCCESS: '역대 기수 전체 조회 성공',
   READ_PARTNERS_SUCCESS: '협력사 조회 성공',
   NO_SEMESTER: '존재하지 않는 기수입니다.',
 };

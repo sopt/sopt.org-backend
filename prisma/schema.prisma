@@ -17,10 +17,10 @@ model Logo {
 model Leader {
   id         Int      @id(map: "leader_pk") @unique(map: "leader_id_uindex") @default(autoincrement())
   semesterId Int
+  partId     Int
   name       String   @db.VarChar(10)
   content    String?
   image      String?  @db.VarChar(500)
-  partId     Int
   part       Part     @relation(fields: [partId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "leader_part_id_fk")
   semester   Semester @relation(fields: [semesterId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "leader_semester_id_fk")
 }
@@ -42,16 +42,23 @@ model Part {
 }
 
 model Semester {
-  id             Int      @id(map: "semester_pk") @unique(map: "semester_id_uindex") @default(autoincrement())
-  history        String?
-  color          String?  @db.VarChar(7)
-  logo           String?
-  backgroundLogo String?
-  name           String?  @db.VarChar(30)
-  year           String?  @db.VarChar(10)
-  leaders        Leader[]
-  Logo           Logo[]
-  members        Member[]
+  id         Int      @id(map: "semester_pk") @unique(map: "semester_id_uindex") @default(autoincrement())
+  history    String?
+  color      String?  @db.VarChar(7)
+  logo       String?  @default("https://sopt-makers.s3.ap-northeast-2.amazonaws.com/mainpage/semester/logo/default.png")
+  background String?
+  name       String?  @db.VarChar(30)
+  year       String?  @db.VarChar(10)
+  coreValue  String?  @db.VarChar(100)
+  leaders    Leader[]
+  Logo       Logo[]
+  members    Member[]
+}
+
+model Partner {
+  id    Int     @id(map: "partner_pk") @unique(map: "partner_id_uindex") @default(autoincrement())
+  name  String? @db.VarChar(50)
+  image String? @db.VarChar(500)
 }
 
 model Project {
@@ -61,10 +68,4 @@ model Project {
   content     String? @db.VarChar(300)
   subContent  String? @db.VarChar(300)
   posterImage String? @db.VarChar(500)
-}
-
-model Partner {
-  id    Int     @id(map: "partner_pk") @unique(map: "partner_id_uindex") @default(autoincrement())
-  name  String? @db.VarChar(50)
-  image String? @db.VarChar(500)
 }
