@@ -42,11 +42,16 @@ model Part {
 }
 
 model Semester {
-  id      Int      @id(map: "semester_pk") @unique(map: "semester_id_uindex") @default(autoincrement())
-  history String?
-  leaders Leader[]
-  Logo    Logo[]
-  members Member[]
+  id             Int      @id(map: "semester_pk") @unique(map: "semester_id_uindex") @default(autoincrement())
+  history        String?
+  color          String?  @db.VarChar(7)
+  logo           String?
+  backgroundLogo String?
+  name           String?  @db.VarChar(30)
+  year           String?  @db.VarChar(10)
+  leaders        Leader[]
+  Logo           Logo[]
+  members        Member[]
 }
 
 model Project {
