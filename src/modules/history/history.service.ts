@@ -57,9 +57,8 @@ export class HistoryService {
     return new HistoryPartnersGetResDTO(projects, partners);
   }
 
-  async getAllSeasonsHistory(page: number, limit: number) {
+  async getAllSemester(page: number, limit: number) {
     const total = await this.prisma.semester.count();
-
     const semesters = await this.prisma.semester.findMany({
       skip: (page - 1) * limit,
       take: limit,

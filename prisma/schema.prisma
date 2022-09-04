@@ -48,8 +48,9 @@ model Semester {
   logo       String?  @default("https://sopt-makers.s3.ap-northeast-2.amazonaws.com/mainpage/semester/logo/default.png")
   background String?
   name       String?  @db.VarChar(30)
-  year       String?  @db.VarChar(10)
+  year       String   @db.VarChar(10)
   coreValue  String?  @db.VarChar(100)
+  coreImage  String?
   leaders    Leader[]
   Logo       Logo[]
   members    Member[]

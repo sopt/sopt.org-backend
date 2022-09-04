@@ -39,7 +39,7 @@ export class HistoryController {
     return ResponseEntity.OK_WITH_DATA(rm.READ_PARTNERS_SUCCESS, data);
   }
 
-  @Get('/seasons')
+  @Get('semesters')
   @ApiOperation({
     summary: '역대 기수 전체 조회',
     description: `
@@ -58,12 +58,12 @@ export class HistoryController {
     description: '서버 내부 오류입니다.',
     type: InternalServerError,
   })
-  async getAllSeasonsHistory(@Query() q: SemesterGetQueryDTO) {
-    const data = await this.historyService.getAllSeasonsHistory(q.page, q.limit);
+  async getAllSemester(@Query() q: SemesterGetQueryDTO) {
+    const data = await this.historyService.getAllSemester(q.page, q.limit);
     return ResponseEntity.OK_WITH_DATA(rm.READ_SEASON_HISTORY_SUCCESS, data);
   }
 
-  @Get(':semesterId')
+  @Get('semesters/:semesterId')
   @ApiOperation({
     summary: '기수별 연혁 조회',
     description: `

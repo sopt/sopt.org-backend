@@ -1,23 +1,22 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Semester } from '@prisma/client';
 import { Exclude } from 'class-transformer';
+import { formatSemesterYear } from 'src/common/helpers/stringFormatter';
 
 export class SemesterDTO {
-  @ApiProperty({ nullable: true }) @Exclude() private readonly mainLogo: string;
-  @ApiProperty({ nullable: true }) @Exclude() private readonly mainColor: string;
-  @ApiProperty({ nullable: true }) @Exclude() private readonly backgroundLogo: string;
-  @ApiProperty() @Exclude() private readonly number: number;
-  @ApiProperty({ nullable: true }) @Exclude() private readonly signature: string;
-  @ApiProperty({ nullable: true }) @Exclude() private readonly year: number;
-  @ApiProperty({ nullable: true }) @Exclude() private readonly semester: number;
+  @ApiProperty() @Exclude() private readonly id: number;
+  @ApiProperty({ nullable: true }) @Exclude() private readonly color: string;
+  @ApiProperty({ nullable: true }) @Exclude() private readonly logo: string;
+  @ApiProperty({ nullable: true }) @Exclude() private readonly background: string;
+  @ApiProperty({ nullable: true }) @Exclude() private readonly name: string;
+  @ApiProperty() @Exclude() private readonly year: string;
 
   constructor(semester: Semester) {
-    this.mainLogo = semester.logo ? semester.logo : null;
-    this.mainColor = semester.color ? `#${semester.color}` : null;
-    this.backgroundLogo = semester.background ? semester.background : null;
-    this.number = semester.id;
-    this.signature = semester.name ? semester.name : null;
-    this.year = semester.year ? +semester.year.split('-')[0] : null;
-    this.semester = semester.year ? +semester.year.split('-')[1] : null;
+    this.id = semester.id;
+    this.color = semester.color ? `#${semester.color}` : null;
+    this.logo = semester.logo ? semester.logo : null;
+    this.background = semester.background ? semester.background : null;
+    this.name = semester.name ? semester.name : null;
+    this.year = semester.year ? formatSemesterYear(semester.year) : null;
   }
 }
