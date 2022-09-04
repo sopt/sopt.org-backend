@@ -8,8 +8,10 @@ datasource db {
 }
 
 model Logo {
-  id    Int    @id(map: "project_pk") @unique(map: "project_id_uindex") @default(autoincrement())
-  image String @unique(map: "logo_image_uindex") @db.VarChar(500)
+  id         Int      @id(map: "logo_pk") @unique(map: "logo_id_uindex") @default(autoincrement())
+  semesterId Int
+  image      String?  @db.VarChar(500)
+  Semester   Semester @relation(fields: [semesterId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "logo_semester_id_fk")
 }
 
 model Leader {
@@ -20,7 +22,7 @@ model Leader {
   image      String?  @db.VarChar(500)
   partId     Int
   part       Part     @relation(fields: [partId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "leader_part_id_fk")
-  Semester   Semester @relation(fields: [semesterId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "leader_semester_id_fk")
+  semester   Semester @relation(fields: [semesterId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "leader_semester_id_fk")
 }
 
 model Member {
@@ -29,19 +31,35 @@ model Member {
   partId     Int?
   count      Int
   part       Part?    @relation(fields: [partId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "member_part_id_fk")
-  Semester   Semester @relation(fields: [semesterId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "member_semester_id_fk")
+  semester   Semester @relation(fields: [semesterId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "member_semester_id_fk")
 }
 
 model Part {
-  id     Int      @id(map: "part_pk") @unique(map: "part_id_uindex") @default(autoincrement())
-  name   String   @unique(map: "part_name_uindex") @db.VarChar(15)
-  Leader Leader[]
-  Member Member[]
+  id      Int      @id(map: "part_pk") @unique(map: "part_id_uindex") @default(autoincrement())
+  name    String   @unique(map: "part_name_uindex") @db.VarChar(15)
+  leaders Leader[]
+  member  Member[]
 }
 
 model Semester {
   id      Int      @id(map: "semester_pk") @unique(map: "semester_id_uindex") @default(autoincrement())
   history String?
   leaders Leader[]
+  Logo    Logo[]
   members Member[]
+}
+
+model Project {
+  id          Int     @id(map: "project_pk") @unique(map: "project_id_uindex") @default(autoincrement())
+  year        Int?
+  title       String? @db.VarChar(50)
+  content     String? @db.VarChar(300)
+  subContent  String? @db.VarChar(300)
+  posterImage String? @db.VarChar(500)
+}
+
+model Partner {
+  id    Int     @id(map: "partner_pk") @unique(map: "partner_id_uindex") @default(autoincrement())
+  name  String? @db.VarChar(50)
+  image String? @db.VarChar(500)
 }

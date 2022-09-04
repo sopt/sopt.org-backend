@@ -14,6 +14,10 @@ export class LogoController {
   @Get()
   @ApiOperation({
     summary: '프로젝트 로고 조회',
+    description: `
+    최근 두 기수의 프로젝트 로고를 조회합니다. \n
+    최소 60개를 넘지 않는 경우, 이전 기수의 프로젝트 로고를 랜덤으로 조회합니다. \n
+    `,
   })
   @ApiOkResponse({
     description: '프로젝트 로고 조회 성공',

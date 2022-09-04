@@ -7,7 +7,7 @@ import { MemberDTO } from './member.dto';
 
 export class HistoryGetResDTO {
   @ApiProperty() @Exclude() private readonly id: number;
-  @ApiProperty() @Exclude() private readonly history: string;
+  @ApiProperty({ nullable: true }) @Exclude() private readonly history: string;
   @ApiProperty({ type: LeaderDTO, isArray: true }) @Exclude() private readonly leaders: LeaderDTO[];
   @ApiProperty() @Exclude() private readonly member: MemberDTO;
 

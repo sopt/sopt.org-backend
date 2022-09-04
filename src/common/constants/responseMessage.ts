@@ -6,10 +6,16 @@ export default {
   NO_IMAGE_TYPE: '이미지 파일이 아닙니다',
   INTERNAL_SERVER_ERROR: '서버 내부 오류',
 
+  //^ 업로드
+  UPLOAD_LOGO_SUCCESS: '로고 업로드 성공',
+  UPLOAD_PARTNERS_POSTER_SUCCESS: '협력사 포스터 업로드 성공',
+  UPLOAD_PARTNERS_LOGO_SUCCESS: '협력사 로고 업로드 성공',
+
   //^ 메인
   READ_LOGO_SUCCESS: '프로젝트 로고 조회 성공',
 
   //^ 연혁
   READ_HISTORY_SUCCESS: '기수별 연혁 조회 성공',
+  READ_PARTNERS_SUCCESS: '협력사 조회 성공',
   NO_SEMESTER: '존재하지 않는 기수입니다.',
 };

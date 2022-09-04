@@ -7,8 +7,8 @@ export class LeaderDTO {
   @ApiProperty() @Exclude() private readonly id: number;
   @ApiProperty() @Exclude() private readonly part: string;
   @ApiProperty() @Exclude() private readonly name: string;
-  @ApiProperty() @Exclude() private readonly content: string;
-  @ApiProperty() @Exclude() private readonly image: string;
+  @ApiProperty({ nullable: true }) @Exclude() private readonly content: string;
+  @ApiProperty({ nullable: true }) @Exclude() private readonly image: string;
 
   constructor(leader: LeaderPart) {
     this.id = leader.partId;

@@ -6,7 +6,6 @@ import { PrismaService } from 'src/modules/prisma/prisma.service';
 export class DataValidatorService {
   constructor(private readonly prisma: PrismaService) {}
 
-  //* 기수 존재 여부 체크
   async checkNotFoundSemester(semesterId: number) {
     const post = await this.prisma.semester.findUnique({
       where: {
